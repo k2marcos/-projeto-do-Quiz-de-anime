@@ -8,6 +8,7 @@ pergunta_atual = PERGUNTAS[indice_atual]
 
 
 def CliqueNoBotao(indice_alternativa, pergunta_atual):
+
      
     global indice_atual, pontos
     indice_atual += 1 
@@ -19,37 +20,14 @@ def CliqueNoBotao(indice_alternativa, pergunta_atual):
     pergunta_atual = PERGUNTAS[indice_atual]
     CarregarPergunta(pergunta_atual)
 
-
+#BG da interface
 imagem_path = "bg_laranja.png"
 
-def load_image(file_path, width, height):
-    imagem = Image.open(file_path)
-    imagem = imagem.resize((width, height), Image.LANCZOS)
-    return ImageTk.PhotoImage(imagem)
-
-root = Tk()
-root.geometry("1400x1200")
-root.title("Quiz")
-
-pontos = 0
-
-bg = load_image(imagem_path, 1400, 1100)
-
-canvas = Canvas(root, width=1400, height=1200)
-canvas.pack(fill=BOTH, expand=YES)
-canvas.create_image(0, 0, anchor=NW, image=bg)
-
-imagem_flv = load_image("orange.png", 350,100 ) 
-
-
-
-imagem_path = "QUIZ GEEK (1).png"
 
 def load_image(file_path, width, height):
     imagem = Image.open(file_path)
     imagem = imagem.resize((width, height), Image.LANCZOS)
     return ImageTk.PhotoImage(imagem)
-
 
 root = Tk()
 root.geometry("1400x1200")
@@ -61,6 +39,28 @@ canvas = Canvas(root, width=1400, height=1200)
 canvas.pack(fill=BOTH, expand=YES)
 canvas.create_image(0, 0, anchor=NW, image=bg)
 
+def jogar():
+    bg_image ="QUIZ GEEK (1).png"
+    IniciandoPergunta()
+
+
+
+#botão de play/quit
+
+
+def IniciandoPergunta():
+    
+    
+    btn_play = Button(root,text="PLAY",compound=CENTER,width=4, height=1,border=False,bg="#FAEA0C")
+    btn_play.place(x=248, y=795)
+    btn_play.configure(font=("Courier", 44, "italic"))
+
+    btn_quit = Button(root,text="QUIT",compound=CENTER,width=4, height=1,border=False,bg="#FAEA0C",)
+    btn_quit.place(x=976, y=795)
+    btn_quit.configure(font=("Courier", 44, "italic"))
+
+#alternativas/imagens do botão
+imagem_flv = load_image("orange.png", 350,100 ) 
 
 def CarregarPergunta(pergunta_atual):
 
