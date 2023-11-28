@@ -50,13 +50,25 @@ btn_quit.place(x=976, y=795)
 btn_quit.configure(font=("Courier", 44, "italic"))
 
 
-def jogar():
-    bg_image ="bg_laranja.png"
 
 #alternativas/imagens do botão
-imagem_flv = load_image("orange.png", 350,100 ) 
 
 def CarregarPergunta(pergunta_atual):
+
+    def load_image(file_path, width, height):
+
+
+        imagemBg = "bg_laranja.png"
+        imagem = Image.open(file_path)
+        imagem = imagem.resize((width, height), Image.LANCZOS)
+        return ImageTk.PhotoImage(imagem)
+    bg2 = load_image(imagem_path, 1400, 1000)
+
+    canvas = Canvas(root, width=1400, height=1200)
+    canvas.pack(fill=BOTH, expand=YES)
+    canvas.create_image(0, 0, anchor=NW, image=bg)
+    
+    imagem_flv = load_image("orange.png", 350,100 ) 
 
     lbpergunta = Label(root, text=pergunta_atual.enunciado,background="#c89546", foreground="#000000", width=75, height=12,font=("bold italic",17))
     lbpergunta.place(x=230, y=273)
