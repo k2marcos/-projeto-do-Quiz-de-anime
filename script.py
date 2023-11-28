@@ -1,7 +1,7 @@
 from tkinter import Tk, Button, Label, Canvas, BOTH, YES, NW, CENTER
 from PIL import Image, ImageTk
 from dados import PERGUNTAS
-
+#variaveis
 pontos = 0 
 indice_atual = 0
 pergunta_atual = PERGUNTAS[indice_atual]
@@ -20,8 +20,8 @@ def CliqueNoBotao(indice_alternativa, pergunta_atual):
     pergunta_atual = PERGUNTAS[indice_atual]
     CarregarPergunta(pergunta_atual)
 
-#BG da interface
-imagem_path = "bg_laranja.png"
+#menu inicial
+imagem_path = "QUIZ GEEK (1).png"
 
 
 def load_image(file_path, width, height):
@@ -39,25 +39,19 @@ canvas = Canvas(root, width=1400, height=1200)
 canvas.pack(fill=BOTH, expand=YES)
 canvas.create_image(0, 0, anchor=NW, image=bg)
 
+  
+
+btn_play = Button(root,text="PLAY",compound=CENTER,width=4, height=1,border=False,bg="#FAEA0C")
+btn_play.place(x=248, y=795)
+btn_play.configure(font=("Courier", 44, "italic"))
+
+btn_quit = Button(root,text="QUIT",compound=CENTER,width=4, height=1,border=False,bg="#FAEA0C",)
+btn_quit.place(x=976, y=795)
+btn_quit.configure(font=("Courier", 44, "italic"))
+
+
 def jogar():
-    bg_image ="QUIZ GEEK (1).png"
-    IniciandoPergunta()
-
-
-
-#botão de play/quit
-
-
-def IniciandoPergunta():
-    
-    
-    btn_play = Button(root,text="PLAY",compound=CENTER,width=4, height=1,border=False,bg="#FAEA0C")
-    btn_play.place(x=248, y=795)
-    btn_play.configure(font=("Courier", 44, "italic"))
-
-    btn_quit = Button(root,text="QUIT",compound=CENTER,width=4, height=1,border=False,bg="#FAEA0C",)
-    btn_quit.place(x=976, y=795)
-    btn_quit.configure(font=("Courier", 44, "italic"))
+    bg_image ="bg_laranja.png"
 
 #alternativas/imagens do botão
 imagem_flv = load_image("orange.png", 350,100 ) 
