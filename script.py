@@ -1,10 +1,53 @@
-from tkinter import *
+from tkinter import Tk, Button, Label, Canvas, BOTH, YES, NW, CENTER
 from PIL import Image, ImageTk
+from dados import PERGUNTAS
 
-imagem_path = "protagonistas.jpg"
+pontos = 0 
+indice_atual = 0
+pergunta_atual = PERGUNTAS[indice_atual]
 
-def bg_Botao():
-    imagem = Image.new("RGBA", (165, 16), (0,0,0,0))
+
+def CliqueNoBotao(indice_alternativa, pergunta_atual):
+     
+    global indice_atual, pontos
+    indice_atual += 1 
+    alternativa = pergunta_atual.alternativas[indice_alternativa]
+    
+    if alternativa.correta:
+        pontos = pontos + 10
+
+    pergunta_atual = PERGUNTAS[indice_atual]
+    CarregarPergunta(pergunta_atual)
+
+
+imagem_path = "bg_laranja.png"
+
+def load_image(file_path, width, height):
+    imagem = Image.open(file_path)
+    imagem = imagem.resize((width, height), Image.LANCZOS)
+    return ImageTk.PhotoImage(imagem)
+
+root = Tk()
+root.geometry("1400x1200")
+root.title("Quiz")
+
+pontos = 0
+
+bg = load_image(imagem_path, 1400, 1100)
+
+canvas = Canvas(root, width=1400, height=1200)
+canvas.pack(fill=BOTH, expand=YES)
+canvas.create_image(0, 0, anchor=NW, image=bg)
+
+imagem_flv = load_image("orange.png", 350,100 ) 
+
+
+
+imagem_path = "QUIZ GEEK (1).png"
+
+def load_image(file_path, width, height):
+    imagem = Image.open(file_path)
+    imagem = imagem.resize((width, height), Image.LANCZOS)
     return ImageTk.PhotoImage(imagem)
 
 
@@ -12,27 +55,30 @@ root = Tk()
 root.geometry("1400x1200")
 root.title("Quiz")
 
-imagem = Image.open(imagem_path)
-imagem = imagem.resize((1400, 1100), Image.LANCZOS)
-bg = ImageTk.PhotoImage(imagem)
+bg = load_image(imagem_path, 1400, 1000)
 
 canvas = Canvas(root, width=1400, height=1200)
 canvas.pack(fill=BOTH, expand=YES)
 canvas.create_image(0, 0, anchor=NW, image=bg)
 
-anal = Label(root, text="pergunta", image=bg_Botao(), foreground="red", width=165, height=16, )
-anal.place(x=140, y=250)
 
-btn1 = Button(root, text="ale", width=55, height=3)
-btn1.place(x=140, y=650)
+def CarregarPergunta(pergunta_atual):
 
-btn2 = Button(root, text="stf", width=55, height=3)
-btn2.place(x=140, y=850)
+    lbpergunta = Label(root, text=pergunta_atual.enunciado,background="#c89546", foreground="#000000", width=75, height=12,font=("bold italic",17))
+    lbpergunta.place(x=230, y=273)
 
-btn3 = Button(root, text="flv", width=55, height=3)
-btn3.place(x=900, y=850)
+    btn1 = Button(root, image=imagem_flv, text=pergunta_atual.alternativas[0].texto, compound=CENTER, width=400, height=60,border=False,bg="#c89546",command=lambda: CliqueNoBotao(0, pergunta_atual),font=("bold italic",16))
+    btn1.place(x=140, y=650)
 
-btn4 = Button(root, text="cls", width=55, height=3)
-btn4.place(x=900, y=650)
+    btn2 = Button(root, image=imagem_flv, text=pergunta_atual.alternativas[1].texto, compound=CENTER, width=400, height=60,border=False,bg="#c89546",command=lambda: CliqueNoBotao(1, pergunta_atual),font=("bold italic",16))
+    btn2.place(x=140, y=850)
+
+    btn3 = Button(root, image=imagem_flv, text=pergunta_atual.alternativas[2].texto, compound=CENTER, width=400, height=60,border=False,bg="#c89546",command=lambda: CliqueNoBotao(2, pergunta_atual),font=("bold italic",16))
+    btn3.place(x=900, y=850)
+
+    btn4 = Button(root, image=imagem_flv, text=pergunta_atual.alternativas[3].texto, compound=CENTER, width=400, height=60,border=False,bg="#c89546",command=lambda: CliqueNoBotao(3, pergunta_atual),font=("bold italic",16))
+    btn4.place(x=900, y=650)
+
+# CarregarPergunta(pergunta_atual)
 
 root.mainloop()
